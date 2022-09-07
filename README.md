@@ -20,10 +20,16 @@ Mamba (https://github.com/mamba-org/mamba) is a reimplementation of the conda pa
 
 ```
 # Load Anaconda on cluster (here mach2):
-module load Anaconda3/2021.04/miniconda-base-2021.04
+module load Anaconda3/2022.01/miniconda-base-2022.01
 
 # To use conda commands in your current shell session, first do:
-source $UIBK_CONDA_PROFILE
+eval "$(/$UIBK_CONDA_DIR/bin/conda shell.bash hook)"
+
+## Install Mambaforge
+#curl -L https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -o Mambaforge-Linux-x86_64.sh
+#bash Mambaforge-Linux-x86_64.sh
+# Activate conda base environment
+#conda activate
 
 # Create environment from yaml file (in envs/):
 conda init bash
