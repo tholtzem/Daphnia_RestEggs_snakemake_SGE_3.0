@@ -2,7 +2,7 @@ __default__:
   jobname: "{rule}.{wildcards}"
   ncpus: 12
   mem: "120gb"
-  walltime: "12:00:00"
+  walltime: "120:00:00"
   #qos: "flux"
   queue: "f2100"
   account: "c7701178"
@@ -55,8 +55,8 @@ run_ngsLD:
   walltime: "120:00:00"
 
 getbeagle_LDpruned:
-  ncpus: 24
-  mem: "240gb"
+  ncpus: 36
+  mem: "360gb"
   walltime: "240:00:00"
 
 PCAngsd_LDpruned:
@@ -82,9 +82,19 @@ theta_stat_SW:
 Fst_index:
   ncpus: 12
   mem: "120gb"
-  walltime: "24:00:00"
+  walltime: "48:00:00"
 
 Fst_global:
   ncpus: 24
   mem: "240gb"
-  walltime: "24:00:00"
+  walltime: "48:00:00"
+
+angsd_saf_samples:
+  ncpus: 12
+  mem: "120gb"
+  walltime: "12:00:00"
+
+real_SFS_samples:
+  ncpus: 12
+  mem: "120gb"
+  walltime: "12:00:00"
