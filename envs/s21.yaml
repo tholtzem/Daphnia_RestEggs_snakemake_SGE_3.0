@@ -1,4 +1,4 @@
-name: eggs2.0 
+name: eggs3.0 
 channels:
   - conda-forge
   - bioconda
@@ -34,5 +34,5 @@ dependencies:
   - bedtools=2.30.0
   - gatk=3.8 
   - bamutil=1.0.15-0
-  - angsd=0.937
+    #- angsd=0.937
     #- angsd=0.921

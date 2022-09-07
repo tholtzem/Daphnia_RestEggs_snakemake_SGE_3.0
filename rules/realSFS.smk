@@ -34,6 +34,7 @@ rule real_SFS_samples:
     /apps/uibk/bin/sysconfcpus -n 12 realSFS saf/saf_samples/{wildcards.sample}.GL2.saf.idx -fold 1 > {output} 2> {log}
     """
 
+
 rule angsd_SAF_PRE_LONG:
   input:
     ref = config["ref_rapid"],
@@ -68,6 +69,7 @@ rule angsd_SAF_df_POST_long_ALL:
     /apps/uibk/bin/sysconfcpus -n 12 angsd -b {input.bamlist} -ref {input.ref} -anc {input.ref} -out saf/POPS/df_POST_long_ALL.GL2 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -minQ 20 -minMapQ 30 -minInd 36 -setMinDepth 36 -setMaxDepth 1250 -GL 2 -doCounts 1 -doSaf 1 2> {log}
    """
 
+
 rule angsd_SAF_df_POST_long_LC:
   input:
     ref = config["ref_rapid"],
@@ -83,6 +85,60 @@ rule angsd_SAF_df_POST_long_LC:
     """
     module load angsd/0.938
     /apps/uibk/bin/sysconfcpus -n 12 angsd -b {input.bamlist} -ref {input.ref} -anc {input.ref} -out saf/POPS/df_POST_long_LC.GL2 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -minQ 20 -minMapQ 30 -minInd 21 -setMinDepth 21 -setMaxDepth 729 -GL 2 -doCounts 1 -doSaf 1 2> {log}
+    """
+
+
+rule angsd_SAF_df_REF_long:
+  input:
+    ref = config["ref_rapid"],
+    bamlist = 'list/pop_list/longispina.txt'
+  output:
+   touch('saf/POPS/df_REF_long.GL2.saf.idx.done')
+  log:
+    'log/saf_POPS/df_REF_long.GL2.saf.idx.log'
+  threads: 12
+  message:
+    """ Compute site allele frequency likelihood (.saf.idx) for each population using angsd """
+  shell:
+    """
+    module load angsd/0.938
+    /apps/uibk/bin/sysconfcpus -n 12 angsd -b {input.bamlist} -ref {input.ref} -anc {input.ref} -out saf/POPS/df_REF_long.GL2 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -minQ 20 -minMapQ 30 -minInd 17 -setMinDepth 17 -setMaxDepth 42 -GL 2 -doCounts 1 -doSaf 1 2> {log}
+    """
+
+
+rule angsd_SAF_df_REF_gal:
+  input:
+    ref = config["ref_rapid"],
+    bamlist = 'list/pop_list/galeata.txt'
+  output:
+   touch('saf/POPS/df_REF_gal.GL2.saf.idx.done')
+  log:
+    'log/saf_POPS/df_REF_gal.GL2.saf.idx.log'
+  threads: 12
+  message:
+    """ Compute site allele frequency likelihood (.saf.idx) for each population using angsd """
+  shell:
+    """
+    module load angsd/0.938
+    /apps/uibk/bin/sysconfcpus -n 12 angsd -b {input.bamlist} -ref {input.ref} -anc {input.ref} -out saf/POPS/df_REF_gal.GL2 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -minQ 20 -minMapQ 30 -minInd 13 -setMinDepth 13 -setMaxDepth 48 -GL 2 -doCounts 1 -doSaf 1 2> {log}
+    """
+
+
+rule angsd_SAF_df_REF_cuc:
+  input:
+    ref = config["ref_rapid"],
+    bamlist = 'list/pop_list/cucullata.txt'
+  output:
+   touch('saf/POPS/df_REF_cuc.GL2.saf.idx.done')
+  log:
+    'log/saf_POPS/df_REF_cuc.GL2.saf.idx.log'
+  threads: 12
+  message:
+    """ Compute site allele frequency likelihood (.saf.idx) for each population using angsd """
+  shell:
+    """
+    module load angsd/0.938
+    /apps/uibk/bin/sysconfcpus -n 12 angsd -b {input.bamlist} -ref {input.ref} -anc {input.ref} -out saf/POPS/df_REF_cuc.GL2 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -minQ 20 -minMapQ 30 -minInd 14 -setMinDepth 14 -setMaxDepth 39 -GL 2 -doCounts 1 -doSaf 1 2> {log}
     """
 
 
@@ -210,15 +266,33 @@ rule Fst_global:
     pop1_pop3 = 'log/saf_POPS/PRElong_LClong.Fst_Global.log'
   threads: 12
   message:
-    """ Get the global fst estimate """
+    """ Get the global Fst estimate """
   shell:
     """
     module load angsd/0.938
-    /apps/uibk/bin/sysconfcpus -n 12 realSFS fst stats saf/POPS/PRElong_ALLlong.fst.idx 2> {log.pop1_pop2} &&
-    /apps/uibk/bin/sysconfcpus -n 12 realSFS fst stats saf/POPS/PRElong_LClong.fst.idx 2> {log.pop1_pop3}
+    /apps/uibk/bin/sysconfcpus -n 12 realSFS fst stats saf/POPS/PRElong_ALLlong.fst.idx > saf/POPS/PRElong_ALLlong.fst.global 2> {log.pop1_pop2} &&
+    /apps/uibk/bin/sysconfcpus -n 12 realSFS fst stats saf/POPS/PRElong_LClong.fst.idx > saf/POPS/PRElong_LClong.fst.global 2> {log.pop1_pop3}
     """
 
-
+rule Fst_windows:
+  input:
+    pop1_pop2 = 'saf/POPS/PRElong_ALLlong.FstIndex.done',
+    pop1_pop3 = 'saf/POPS/PRElong_LClong.FstIndex.done'
+  output:
+    pop1_pop2 = touch('saf/POPS/PRElong_ALLlong.Fst_Windows.done'),
+    pop1_pop3 = touch('saf/POPS/PRElong_LClong.Fst_Windows.done')
+  log:
+    pop1_pop2 = 'log/saf_POPS/PRElong_ALLlong.Fst_Windows.log',
+    pop1_pop3 = 'log/saf_POPS/PRElong_LClong.Fst_Windows.log'
+  threads: 12
+  message:
+    """ Get the Fst estimates per window """
+  shell:
+    """
+    module load angsd/0.938
+    /apps/uibk/bin/sysconfcpus -n 12 realSFS fst stats2 saf/POPS/PRElong_ALLlong.fst.idx -win 10000 -step 1000 > saf/POPS/PRElong_ALLlong.fst.sliding.windows.txt 2> {log.pop1_pop2} &&
+    /apps/uibk/bin/sysconfcpus -n 12 realSFS fst stats saf/POPS/PRElong_LClong.fst.idx -win 10000 -step 1000 > saf/POPS/PRElong_LClong.fst.sliding.windows.txt 2> {log.pop1_pop3}
+    """
 
 #rule plotHeterozygosity_samples:
 #  input:

@@ -56,11 +56,11 @@ rule getbeagle_LDpruned:
     touch('angsd/{sets}/LDpruned_angsd_GL{GL}_minInd{IND}_maf{minMaf}_minDepth{MinDepth}_maxDepth{MaxDepth}.done')
   log:
     'log/{sets}/LDpruned_angsd_GL{GL}_minInd{IND}_maf{minMaf}_minDepth{MinDepth}_maxDepth{MaxDepth}.log'
-  threads: 24
+  threads: 36
   message:
     """ Calculate genotype likelihoods on predefined LD pruned sites only using angsd (-doMajorMinor 3 -sites)  """
   shell:
     """
     module load angsd/0.938
-    /apps/uibk/bin/sysconfcpus -n 24 angsd -b {input.bamlist} -out angsd/{wildcards.sets}/LDpruned_angsd_GL{wildcards.GL}_minInd{wildcards.IND}_maf{wildcards.minMaf}_minDepth{wildcards.MinDepth}_maxDepth{wildcards.MaxDepth} -anc {input.ref} -GL {wildcards.GL} -doGlf 2 -doMajorMinor 3 -doMaf 1 -sites {input.sites} -rf {input.chroms} 2> {log}
+    /apps/uibk/bin/sysconfcpus -n 36 angsd -b {input.bamlist} -out angsd/{wildcards.sets}/LDpruned_angsd_GL{wildcards.GL}_minInd{wildcards.IND}_maf{wildcards.minMaf}_minDepth{wildcards.MinDepth}_maxDepth{wildcards.MaxDepth} -anc {input.ref} -GL {wildcards.GL} -doGlf 2 -doMajorMinor 3 -doMaf 1 -sites {input.sites} -rf {input.chroms} 2> {log}
     """

@@ -56,10 +56,10 @@ if os.path.isfile("depth/stats/depthFilter.list"):
 else:
   print ("Depth file does not exist")
 
-sets=['ALL', 'LC', 'LC_REF', 'LC_withoutREF']
+sets=['LC_REF', 'LC_withoutREF']
 
-GL = ['2', '2', '2', '2']
-minMaf = ['0.05', '0.05', '0.05', '0.05']
+GL = ['2', '2']
+minMaf = ['0.05', '0.05']
 
 #filters = list(zip(sets, GL[1], minMaf[1], N, MinDepth, MaxDepth))
 
