@@ -10,15 +10,9 @@ list/*
 log/*
 ngsLD/*
 pcangsd/*
-raw/raw_reads/*
-raw/qc/fastqc/*
-raw/qc/multiqc/*
 realigned/*
 ref/*
 saf/*
-trm/*
-GLs.md
-notes.md
 *.fastq*
 *.fq*
 *.fastqc*
@@ -40,6 +34,10 @@ notes.md
 *.beagle.gz
 *.mafs.gz
 *.R*
+*.saf*
+*.sfs*
+*theta*
+*fst*
 *.snakemake/
 *stats*
 *hist*
