@@ -4,13 +4,14 @@
 
 ======================================================
 
-Snakemake workflow for the analysis of DNA from *Daphnia*-resting eggs on the mach2 HPC cluster with the PBS-torque batch job submission system. 
+Snakemake workflow for the analysis of DNA from *Daphnia*-resting eggs on the leo4 HPC cluster with the SGE batch job submission system. 
 
 The snakemake workflow was modified from the [Daphnia_RestEggs_snakemake_pbs_2.0](https://github.com/tholtzem/Daphnia_RestEggs_snakemake_pbs_2.0), which was initially based on the [ta_dna_snakemake_pbs Tutorial](https://github.com/schimar/ta_dna_snakemake_pbs),the [Snakemake Cluster Tutorial](https://github.com/SchlossLab/snakemake_cluster_tutorial.git) and the [Software Carpentry lesson repository](https://hpc-carpentry.github.io/hpc-python/17-cluster/). For more information on snakemake itself (https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html).
 
 The analysis is based on the [physalia-lcwgs: the Physalia course on Population genomic inference from low-coverage whole-genome sequencing data, Oct 19-22 2020](https://github.com/nt246/physalia-lcwgs).
 
-This workflow starts with mapping to the new reference assembly of *D. galeata* (https://doi.org/10.1093/gbe/evab267). For details on quality filtering and cleaning reads from non-target DNA with Kraken2 see [Daphnia_RestEggs_snakemake_pbs_2.0](https://github.com/tholtzem/Daphnia_RestEggs_snakemake_pbs_2.0). Please note that I used PBS submission scripts in the previous workflow, but here I will use SGE submission scripts.
+This workflow starts with mapping to the new reference assembly of [*D. galeata*](https://doi.org/10.1093/gbe/evab267). For details on quality filtering and cleaning reads from non-target DNA with Kraken2 see [Daphnia_RestEggs_snakemake_pbs_2.0](https://github.com/tholtzem/Daphnia_RestEggs_snakemake_pbs_2.0). Please note that I used PBS submission scripts in the previous workflow.
+
 ======================================================
 
 ## conda/mamba and other [dependencies](https://github.com/schimar/ta_dna_snakemake_pbs/blob/main/envs/s21.yaml)   
